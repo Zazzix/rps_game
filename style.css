@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0a0a0a;
+    font-family: "Orbitron", sans-serif;
+    color: #00ff00;
+}
+
+.game-screen {
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    gap: 100px;
+}
+
+button {
+    width: fit-content;
+    height: fit-content;
+    color: #00ff00;
+    background-color: transparent;
+    background: none;
+    padding: 8px 16px;
+    font-size: 18px;
+    border: 1px #00ff00 solid;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: "Orbitron", sans-serif;
+}
+
+.rock:hover,
+.paper:hover,
+.scissors:hover {
+    color: #00ff00;
+    border-color: #00ff00;
+    box-shadow: 0 0 8px #00ff00;
+    transition: box-shadow 0.3s;
+}
+
+.reset:hover {
+    background-color: #00e0e0;
+    border: 1px #00e0e0 solid;
+    color: #0a0a0a;
+}
+
+.hud {
+    display: flex;
+    font-size: 20px;
+    justify-content: space-between;
+}
+
+.title {
+    text-align: center;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-around;
+}
