@@ -1,3 +1,16 @@
+const rock = document.querySelector(".rock")
+const paper = document.querySelector(".paper")
+const scissors = document.querySelector(".scissors")
+const reset = document.querySelector(".reset")
+const hudText = document.querySelector(".round-result")
+const playerScore = document.querySelector(".player-score")
+const computerScore = document.querySelector(".computer-score")
+const currentPlayerScore = document.querySelector(".current-score")
+const currentPcScore = document.querySelector(".pc-score")
+let humanScore = 0;
+let pcScore = 0;
+
+
 
 function getComputerChoice() {
     let number = Math.ceil(Math.random() * 3)
@@ -11,52 +24,68 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    const input = prompt('Choose: Rock, Paper, Scissors').toLowerCase();
-
-    return input;
-}
 
 
+rock.addEventListener('click', () => {
+    playGame('rock')
+})
+
+paper.addEventListener('click', () => {
+    playGame('paper')
+})
+
+scissors.addEventListener('click', () => {
+    playGame('scissors')
+})
+
+reset.addEventListener('click', () => {
+    hudText.textContent = "Choose: Rock, Paper, Scissors.";
+    humanScore = 0;
+    pcScore = 0;
+    currentPlayerScore.textContent = humanScore;
+    currentPcScore.textContent = pcScore;
+    rock.disabled = false;
+    paper.disabled = false;
+    scissors.disabled = false;
+})
 
 
-function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
-
-    for (let i = 1; i <= 5; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
 
 
-        function playRound(humanChoice, computerChoice) {
-            if (humanChoice === 'rock' && computerChoice === 'scissors') {
-                humanScore += 1;
-                return `You win! ${humanChoice} beats ${computerChoice}. Score: You - ${humanScore}, PC - ${computerScore}`;
-            } else if (humanChoice === 'scissors' && computerChoice === 'paper') {
-                humanScore += 1;
-                return `You win! ${humanChoice} beats ${computerChoice}. Score: You - ${humanScore}, PC - ${computerScore}`;
-            } else if (humanChoice === 'paper' && computerChoice === 'rock') {
-                humanScore += 1;
-                return `You win! ${humanChoice} beats ${computerChoice}. Score: You - ${humanScore}, PC - ${computerScore}`;
-            } else if (humanChoice === computerChoice) {
-                return `It's a tie! ${humanChoice} can't beat ${computerChoice}. Score: You - ${humanScore}, PC - ${computerScore}`;
-            } else {
-                computerScore += 1;
-                return `You loose! ${computerChoice} beats ${humanChoice}. Score: You - ${humanScore}, PC - ${computerScore}`;
-            }
-        }
+function playGame(humanSelection) {
+    const computerSelection = getComputerChoice();
 
-        console.log(playRound(humanSelection, computerSelection));
-    }
 
-    if (humanScore === computerScore) {
-        console.log(`It's a tie! Score: You - ${humanScore}, PC - ${computerScore}`);
-    } else if (humanScore > computerScore) {
-        console.log(`You win! You - ${humanScore}, PC - ${computerScore}`);
+    if (humanSelection === 'rock' && computerSelection === 'scissors') {
+        humanScore += 1;
+        currentPlayerScore.textContent = humanScore;
+        hudText.textContent = "You win!";
+    } else if (humanSelection === 'scissors' && computerSelection === 'paper') {
+        humanScore += 1;
+        currentPlayerScore.textContent = humanScore;
+        hudText.textContent = "You win!";
+    } else if (humanSelection === 'paper' && computerSelection === 'rock') {
+        humanScore += 1;
+        currentPlayerScore.textContent = humanScore;
+        hudText.textContent = "You win!";
+    } else if (humanSelection === computerSelection) {
+        hudText.textContent = "It's a tie!";
     } else {
-        console.log(`You loose! Score: You - ${humanScore}, PC - ${computerScore}`);
+        pcScore += 1;
+        currentPcScore.textContent = pcScore;
+        hudText.textContent = "You loose!";
+    }
+
+
+    if (humanScore == 5) {
+        hudText.textContent = "You are the winner!";
+        rock.disabled = true;
+        paper.disabled = true;
+        scissors.disabled = true;
+    } else if (pcScore == 5) {
+        hudText.textContent = "PC is the winner!";
+        rock.disabled = true;
+        paper.disabled = true;
+        scissors.disabled = true;
     }
 }
-
-playGame();
